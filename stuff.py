@@ -13,12 +13,12 @@ if ".env" in f:
     redisU= env['redisURI']
     redisP= env['redisPASS']
 else: # if not .env try enviroment vars
-    token = os.environ('token', None)
-    telet = os.environ('telet', None)
-    telec = os.environ('telec', None)
-    igID  = os.environ('igID', None)
-    redisU= os.environ('redisURI', None)
-    redisP= os.environ('redisPASS', None)
+    token = os.getenv('token', None)
+    telet = os.getenv('telet', None)
+    telec = os.getenv('telec', None)
+    igID  = os.getenv('igID', None)
+    redisU= os.getenv('redisURI', None)
+    redisP= os.getenv('redisPASS', None)
 
 if not token or not igID:
     print('PLEASE SET token, igID IN .env FILE OR AS ENV VARS')

@@ -23,7 +23,7 @@ enjoy :)
     needed for storing last time posted, to keep the post every 5hrs cycle
   - Business Instgram Account  
     from graph api requirments, you can switch any account you have
-  - Lastlonging access_token  
+  - Last longing access_token  
     Normal tokens expire in 30mins, follow graph api docs to get one
   - Valid token permissions  
     Not using the right permissions will fail the bot, follow  
@@ -71,5 +71,5 @@ find me [xd22.me](https://xd22.me)
 
 # Donation
 You can support my work by donating to the following address,
-THANKS KIND SOUL!
-  - XMR - `433CbZXrdTBQzESkZReqQp1TKmj7MfUBXbc8FkG1jpVTBFxY9MCk1RXPWSG6CnCbqW7eiMTEGFgbHXj3rx3PxZadPgFD3DX`
+
+  - XMR - `433CbZXrdTBQzESkZReqQp1TKmj7MfUBXbc8FkG1jpVTBFxY9MCk1RXPWSG6CnCbqW7eiMTEGFgbHXj3rx3PxZadPgFD3DX` THANKS KIND SOUL!
