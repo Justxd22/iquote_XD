@@ -34,7 +34,7 @@ def stats(notes=None):
     if not notes or notes == "POSTED!":
        msg += "\n*=====POST DETAILS=====*"
        msg += "\n" + caption.replace('_', '\_')
-       msg += "\n\n" + url
+       msg += "\n\n" + url.replace('_', '\_')
        msg += f"\n\n*ERRORS:*\n{errors}"
        if old != " ": msg += f"\n\n*Duplicates:*\n{old}"
     print(msg)
@@ -42,7 +42,9 @@ def stats(notes=None):
     if not telet: print(msg)
     else:
         u = f"https://api.telegram.org/bot{telet}/sendMessage?chat_id={telec}&parse_mode=Markdown&text={msg}"
-        try: t = requests.get(u)
+        try:
+            t = requests.get(u)
+            print(t.text)
         except Exception as e: print(e)
 
 
@@ -82,7 +84,13 @@ async def iquote():
 
            # upload quote to bashupload
            # as instagram graph api requires photo url
-           url = requests.put('https://bashupload.com', data=quote.getbuffer())
+           try: url = requests.put('https://bashupload.com', data=quote.getbuffer())
+           except Exception as e:
+               print(e, url.status_code)
+               errors += "[ERROR]\n\n" + str(e)
+               stats() # report error
+               await asyncio.sleep(4)
+               continue
            # the following done by absoulte noob
            url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
            # time to upload
@@ -105,7 +113,7 @@ async def iquote():
                    errors += "[ERROR]\n\n" + str(e)
                    await asyncio.sleep(4)
                    if t >= 3:
-                       stats() # report error and exit
+                       stats() # report error and try again
                        continue
                        # exit(1)
            nquotes += 1
