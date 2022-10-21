@@ -69,7 +69,7 @@ async def iquote():
            # only post if 5 hrs were passed
            while 1:
                # generate quote & check if it's new
-               i = gquote(format="jpeg", output=False, shape="box")
+               i = gquote(format="jpeg", output=False, shape="portrait")
                quote = i.run()
                # record quote in db to avoid duplicates
                text = base64.urlsafe_b64encode(bytes(i.quote, 'utf-8'))[:20].decode()
