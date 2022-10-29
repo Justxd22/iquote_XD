@@ -32,5 +32,22 @@ if db:
     ol = db.get('OLDQ')
     if not ol: db.set('OLDQ', '{}')
 
-cap  = "%23quotes %23xd_quote %23writers %23artist %23feelings %23lifequotes %23quoteoftheday %23spreadpositivity %23motivationoftheday %23positivityiskey %23inspiration %23inspirationalquotes %23motivationalquotesoftheday %23quotesofinstagram %23mindsetmatters %23wisdomquote %23quotestoliveby %23explore %233amquotes %23explorepage %23trending %23trendingnow %23dailylifequotes %23wisdom %23wordsofwisdom %23dailywisdom %23growth %23hviralquotes %23realshit"
+cap  = """
+⠀⠀⠀⠀⠀.　　　　　　　　　　⠀　　　　　　✦ 　　　　　,　　　　　　　.
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀☀️
+　　　　　　*　　　　　　　　　　　.
+.　　　　　　　　　　　　　. 　　✦⠀　   　　　,　　　　　　　　　*
+
+　　　　　　　　　　　　　　　　　　.
+　　　　.　　　　.　　　⠀🌖
+　　　　　　　　　　　.
+🚀
+　　　˚　　　　　　　　ﾟ　　　　　.
+　.⠀　　🌎⠀‍⠀‍⠀‍⠀‍⠀‍⠀‍⠀‍⠀‍⠀‍⠀‍⠀,
+　　　*　　⠀.
+　　　　　.　　　　　　　　　　⠀✦
+　˚　　　　　　　　　　　　　　*
+.⠀ 　　　　　　　　　　.
+
+%23quotes %23xd_quote %23writers %23artist %23feelings %23lifequotes %23quoteoftheday %23spreadpositivity %23motivationoftheday %23positivityiskey %23inspiration %23inspirationalquotes %23motivationalquotesoftheday %23quotesofinstagram %23mindsetmatters %23wisdomquote %23quotestoliveby %23explore %233amquotes %23explorepage %23trending %23trendingnow %23dailylifequotes %23wisdom %23wordsofwisdom %23dailywisdom %23growth %23hviralquotes %23realshit"""
 base = f"https://graph.facebook.com/v15.0/{igID}"

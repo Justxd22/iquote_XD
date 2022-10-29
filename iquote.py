@@ -69,7 +69,7 @@ async def iquote():
            # only post if 5 hrs were passed
            while 1:
                # generate quote & check if it's new
-               i = gquote(format="jpeg", output=False, shape="portrait")
+               i = gquote(format="jpeg", output=False, shape="box")
                quote = i.run()
                # record quote in db to avoid duplicates
                text = base64.urlsafe_b64encode(bytes(i.quote, 'utf-8'))[:20].decode()
@@ -94,7 +94,7 @@ async def iquote():
            # the following done by absoulte noob
            url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
            # time to upload
-           caption = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n.\n.\n.\n.\n.\n{cap}"
+           caption = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
            # try to post if any errors try again for x4 times
            mediaID = None
            for t in range(4):
