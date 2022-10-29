@@ -1,4 +1,4 @@
-import json, os, time, requests, base64, asyncio, signal
+import json, os, time, requests, base64, asyncio, signal, random
 from threading import Thread as thrd
 from gquote import gquote
 from stuff import *
@@ -94,13 +94,14 @@ async def iquote():
            # the following done by absoulte noob
            url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
            # time to upload
-           caption = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
+           caption  = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
+           location = random.choice(lc)
            # try to post if any errors try again for x4 times
            mediaID = None
            for t in range(4):
                try:
                    if not mediaID:
-                       mediaID = requests.post(base + f"/media?image_url={url}&caption={caption}&access_token={token}")
+                       mediaID = requests.post(base + f"/media?image_url={url}&caption={caption}&location_id={location}&access_token={token}")
                        code    = mediaID.status_code, mediaID.text
                        if code[0] != 200:
                            mediaID = None

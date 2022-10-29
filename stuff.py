@@ -12,6 +12,7 @@ if ".env" in f:
     igID  = env['igID']
     redisU= env['redisURI']
     redisP= env['redisPASS']
+    lc    = env['locationID'] # instgram location ids
 else: # if not .env try enviroment vars
     token = os.getenv('token', None)
     telet = os.getenv('telet', None)
@@ -19,10 +20,13 @@ else: # if not .env try enviroment vars
     igID  = os.getenv('igID', None)
     redisU= os.getenv('redisURI', None)
     redisP= os.getenv('redisPASS', None)
+    lc    = os.getenv('locationID', None)
 
 if not token or not igID:
     print('PLEASE SET token, igID IN .env FILE OR AS ENV VARS')
     exit(1)
+
+lc = json.loads(lc) if lc else [100408319553597]
 
 db = redis_connection(redisU, redisP)
 # init db if it's the first run
