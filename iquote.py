@@ -1,4 +1,5 @@
-import json, os, time, requests, base64, asyncio, signal
+import json, os, time, requests, base64, asyncio, signal, random
+from urllib.request import urlretrieve
 from threading import Thread as thrd
 from gquote import gquote
 from stuff import *
@@ -7,6 +8,7 @@ old        = " "
 errors     = " "
 nquotes    = None
 old_quotes = None
+old_backs  = None
 lt         = None
 
 # update DB
@@ -15,12 +17,14 @@ def updb(task=""):
     if task == "startup":
        nquotes    = int(db.get('nquotes')) # no. quotes
        old_quotes = json.loads(db.get('OLDQ'))
+       old_backs  = json.loads(db.get('OLDB'))
        lt         = int(db.get('lt').split('.')[0])
        return
 
     db.set('lt', lt)
     db.set('nquotes', nquotes)
     db.set('OLDQ', json.dumps(old_quotes))
+    db.set('OLDB', json.dumps(old_backs))
 
 # report stats to telegram
 def stats(notes=None):
@@ -64,12 +68,34 @@ async def iquote():
     global lt, nquotes, old_quotes, old, errors, caption, url
     if not lt: lt = 0 # if for any reason lt isnt set
     tt = 60*60*5   # target is 5 hours
+    back = None
     while 1:
        if int(time.time()) >= lt + tt: # last post time + five hours
            # only post if 5 hrs were passed
            while 1:
+               # get random background
+               if not back:
+                  back = requests.get(f"https://api.unsplash.com/photos/random?collections={random.choice(collections)}&h=1080&w=1350&client_id={token_splash}&content_filter=high")
+                  back = json.loads(back.text)
+                  color= back['color']
+                  backid = back['id']
+                  back = back['urls']['raw']
+                  if backid in old_backs:
+                     back = None
+                     continue
+                  else: old_backs.append(backid)
+               # Download the background
+               try:
+                  background = urlretrieve(back)[0]
+               except Exception as e:
+                  print(e)
+                  errors += "[ERROR]\n\n" + str(e)
+                  stats() # report error
+                  back = None
+                  await asyncio.sleep(4)
+                  continue
                # generate quote & check if it's new
-               i = gquote(format="jpeg", output=False, shape="box")
+               i = gquote(format="jpeg", output=False, shape="box", background=background, color=color)
                quote = i.run()
                # record quote in db to avoid duplicates
                text = base64.urlsafe_b64encode(bytes(i.quote, 'utf-8'))[:20].decode()
@@ -94,13 +120,14 @@ async def iquote():
            # the following done by absoulte noob
            url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
            # time to upload
-           caption = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
+           caption  = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
+           location = random.choice(lc)
            # try to post if any errors try again for x4 times
            mediaID = None
            for t in range(4):
                try:
                    if not mediaID:
-                       mediaID = requests.post(base + f"/media?image_url={url}&caption={caption}&access_token={token}")
+                       mediaID = requests.post(base + f"/media?image_url={url}&caption={caption}&location_id={location}&access_token={token}")
                        code    = mediaID.status_code, mediaID.text
                        if code[0] != 200:
                            mediaID = None
