@@ -13,7 +13,7 @@ lt         = None
 
 # update DB
 def updb(task=""):
-    global lt, nquotes, old_quotes
+    global lt, nquotes, old_quotes, old_backs
     if task == "startup":
        nquotes    = int(db.get('nquotes')) # no. quotes
        old_quotes = json.loads(db.get('OLDQ'))
