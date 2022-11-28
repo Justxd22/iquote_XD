@@ -146,6 +146,7 @@ async def iquote():
            nquotes += 1
            lt = int(time.time())
            updb()
+           back = None
            stats('POSTED!')
            continue
        else: # last post + five hours - current time = how much time to wait
