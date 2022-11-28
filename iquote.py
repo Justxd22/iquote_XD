@@ -13,7 +13,7 @@ lt         = None
 
 # update DB
 def updb(task=""):
-    global lt, nquotes, old_quotes
+    global lt, nquotes, old_quotes, old_backs
     if task == "startup":
        nquotes    = int(db.get('nquotes')) # no. quotes
        old_quotes = json.loads(db.get('OLDQ'))
@@ -75,11 +75,11 @@ async def iquote():
            while 1:
                # get random background
                if not back:
-                  back = requests.get(f"https://api.unsplash.com/photos/random?collections={random.choice(collections)}&h=1080&w=1350&client_id={token_splash}&content_filter=high")
+                  back = requests.get(f"https://api.unsplash.com/photos/random?collections={random.choice(collections)}&h=1080&w=1350&client_id={tokenSP}&content_filter=high")
                   back = json.loads(back.text)
                   color= back['color']
                   backid = back['id']
-                  back = back['urls']['raw']
+                  back = back['urls']['raw'] + '&q=100&fit=crop&w=1080&h=1350'
                   if backid in old_backs:
                      back = None
                      continue

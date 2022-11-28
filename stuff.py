@@ -37,6 +37,8 @@ if db:
     if not n: db.set('nquotes', 1)
     ol = db.get('OLDQ')
     if not ol: db.set('OLDQ', '{}')
+    ol = db.get('OLDB')
+    if not ol: db.set('OLDB', '{}')
 
 cap  = """
 ⠀⠀⠀⠀⠀.　　　　　　　　　　⠀　　　　　　✦ 　　　　　,　　　　　　　.
