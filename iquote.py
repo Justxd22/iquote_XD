@@ -79,7 +79,7 @@ async def iquote():
                   back = json.loads(back.text)
                   color= back['color']
                   backid = back['id']
-                  back = back['urls']['raw']
+                  back = back['urls']['raw'] + '&q=100&fit=crop&w=1080&h=1350'
                   if backid in old_backs:
                      back = None
                      continue
