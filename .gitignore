@@ -16,5 +16,6 @@ __pycache__/
 test/
 Temp/
 temp/
+t2/
 .cache/
 */__pycache__/
