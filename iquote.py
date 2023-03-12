@@ -124,7 +124,7 @@ async def iquote():
            location = random.choice(lc)
            # try to post if any errors try again for x4 times
            mediaID = None
-           for t in range(4):
+           for t in range(7):
                try:
                    if not mediaID:
                        mediaID = requests.post(base + f"/media?image_url={url}&caption={caption}&location_id={location}&access_token={token}")
@@ -143,6 +143,11 @@ async def iquote():
                        stats() # report error and try again
                        continue
                        # exit(1)
+                   elif t >= 5:
+                       await asyncio.sleep(60)
+                       continue
+                   elif t >= 6:
+                       exit(1)
            nquotes += 1
            lt = int(time.time())
            updb()
