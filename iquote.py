@@ -13,7 +13,9 @@ lt         = None
 
 # update DB
 def updb(task=""):
-    global lt, nquotes, old_quotes, old_backs
+    global lt, nquotes, old_quotes, old_backs, db
+    try: db.ping()
+    except: db = init_db()
     if task == "startup":
        nquotes    = int(db.get('nquotes')) # no. quotes
        old_quotes = json.loads(db.get('OLDQ'))

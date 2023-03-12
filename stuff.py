@@ -30,7 +30,12 @@ if not token or not igID:
 
 lc = json.loads(lc) if lc else [100408319553597]
 
-db = redis_connection(redisU, redisP)
+db = None
+def init_db():
+    db = redis_connection(redisU, redisP)
+    return db
+db = init_db()    
+
 # init db if it's the first run
 if db:
     n = db.get('nquotes')
