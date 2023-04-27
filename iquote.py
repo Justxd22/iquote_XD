@@ -112,7 +112,7 @@ async def iquote():
 
            # upload quote to bashupload
            # as instagram graph api requires photo url
-           try: url = requests.put('https://bashupload.com', data=quote.getbuffer())
+           try: url = requests.put('https://transfer.sh', data=quote.getbuffer())
            except Exception as e:
                print(e, url.status_code)
                errors += "[ERROR]\n\n" + str(e)
