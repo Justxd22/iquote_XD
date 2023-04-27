@@ -24,7 +24,8 @@ enjoy :)
   - Business Instgram Account  
     from graph api requirments, you can switch any account you have
   - Last longing access_token  
-    Normal tokens expire in 30mins, [follow graph api docs](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived) to get one
+    Normal tokens expire in 30mins, [follow graph api docs](https://developers.facebook.com/docs/facebook-login/guides/access-tokens/get-long-lived) to get one  
+    find your app-id & app-secret Go to [developers.facebook.com/apps](https://developers.facebook.com/apps/) Select your app settings/basic => app_id/app_secret
   - Valid token permissions  
     Not using the right permissions will fail the bot, follow  
     graph API docs to get the right permissions  
