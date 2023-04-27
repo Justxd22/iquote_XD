@@ -120,7 +120,8 @@ async def iquote():
                await asyncio.sleep(4)
                continue
            # the following done by absoulte noob
-           url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
+           #url = url.text.replace('\n', '').replace('='*25, '').split("wget ")[1]
+           url = url.text
            # time to upload
            caption  = f"%23{nquotes} by ~{i.author.replace('~','').replace(' ','')}\n{cap}"
            location = random.choice(lc)
